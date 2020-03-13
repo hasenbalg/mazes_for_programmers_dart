@@ -75,4 +75,6 @@ class Grid {
 
     return output;
   }
+
+  List<List<Cell>> eachRow() => grid;
 }
