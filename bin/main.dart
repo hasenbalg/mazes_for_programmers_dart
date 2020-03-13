@@ -1,14 +1,6 @@
-import 'grid.dart';
-import 'binary_tree.dart';
-import 'sidewinder.dart';
+import 'package:mazes_for_programmers_dart/mazes_for_programmers_dart.dart'
+    as mazes_for_programmers_dart;
 
-main(List<String> args) {
-  var grid = Grid(6, 5);
-  var bt = BinaryTree().on(grid);
-
-  // print(bt);
-  var grid2 = Grid(4, 4);
-
-  var sidewinder = Sidewinder().on(grid2);
-  print(sidewinder);
+void main(List<String> arguments) {
+  mazes_for_programmers_dart.run();
 }

@@ -3,11 +3,11 @@ class Cell {
   Cell north, south, east, west;
   Map<Cell, bool> links;
   Cell(this.row, this.col) {
-    this.north = null;
-    this.south = null;
-    this.east = null;
-    this.west = null;
-    this.links = Map<Cell, bool>();
+    north = null;
+    south = null;
+    east = null;
+    west = null;
+    links = <Cell, bool>{};
   }
 
   Cell link(Cell cell, {bool bidi = true}) {
@@ -31,7 +31,7 @@ class Cell {
   }
 
   List<Cell> neighbors() {
-    List<Cell> neighbors = [];
+    var neighbors = [];
     if (north != null) {
       neighbors.add(north);
     }

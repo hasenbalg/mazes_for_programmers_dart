@@ -4,16 +4,17 @@ import 'grid.dart';
 
 class Sidewinder {
   Grid on(Grid grid) {
-    for (List<Cell> row in grid.eachRow()) {
-      List<Cell> run = [];
-      for (Cell cell in row) {
+    for (var row in grid.eachRow()) {
+      List<Cell> run;
+      run = [];
+      for (var cell in row) {
         run.add(cell);
 
-        bool atEasternBoundry = (cell.east == null);
-        bool atNorthernBoundry = (cell.north == null);
-        Random rnd = Random();
+        var atEasternBoundry = (cell.east == null);
+        var atNorthernBoundry = (cell.north == null);
+        var rnd = Random();
 
-        bool shouldCloseOut =
+        var shouldCloseOut =
             atEasternBoundry || (!atNorthernBoundry && rnd.nextInt(2) == 0);
 
         if (shouldCloseOut) {
