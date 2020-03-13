@@ -53,6 +53,10 @@ class Grid {
   List<Cell> eachCell() => grid.expand((c) => c).toList();
   List<List<Cell>> eachRow() => grid;
 
+  String contentsOf(Cell cell) {
+    return ' ';
+  }
+
   @override
   String toString() {
     var output = '+' + ('---+' * cols) + '\n';
@@ -62,7 +66,7 @@ class Grid {
 
       for (var cell in row) {
         cell ??= Cell(-1, -1);
-        var body = '   ';
+        var body = ' ${contentsOf(cell)} ';
         var easternBoundry = (cell.isLinked(cell.east)) ? ' ' : '|';
         top += body + easternBoundry;
 

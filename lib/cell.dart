@@ -1,3 +1,5 @@
+import 'package:mazes_for_programmers_dart/distances.dart';
+
 class Cell {
   final int row, col;
   Cell north, south, east, west;
@@ -46,4 +48,28 @@ class Cell {
     }
     return neighbors;
   }
+
+  Distances distances() {
+    var distances = Distances(this);
+    List<Cell> frontier;
+    frontier = [this];
+    while (frontier.isNotEmpty) {
+      List<Cell> newFronier;
+      newFronier = [];
+      for (var cell in frontier) {
+        for (var linked in cell.getLinkedCells()) {
+          if (distances.getCellDistance(linked) != null) {
+            continue;
+          }
+          distances.setCellDistance(
+              linked, distances.getCellDistance(cell) + 1);
+          newFronier.add(linked);
+        }
+      }
+      frontier = newFronier;
+    }
+    return distances;
+  }
+
+  List<Cell> getLinkedCells() => links.keys.toList();
 }
