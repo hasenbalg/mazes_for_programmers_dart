@@ -24,10 +24,12 @@ void run() {
   grid3.distances = distances;
   print(grid3);
 
+  print('path from nw corner to sw corner');
+
   var grid4 = DistanceGrid(4, 4);
   Sidewinder().on(grid4);
   var start4 = grid4.grid[0][0];
   var distances4 = start4.distances();
-  grid4.distances = distances4;
+  grid4.distances = distances4.pathTo(grid4.grid[grid4.rows - 1][0]);
   print(grid4);
 }
