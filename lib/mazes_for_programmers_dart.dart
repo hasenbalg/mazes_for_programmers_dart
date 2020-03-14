@@ -59,43 +59,59 @@ void run() {
 
   print('colored by distance');
 
-  var gridCBT = ColoredGrid(25, 25);
-  BinaryTree().on(gridCBT);
-  var startCBT = gridCBT.grid[12][12];
-  gridCBT.distances = startCBT.distances();
+  binaryTree();
+  sideWinder();
+  aldoursBroder();
+  wilson();
+  huntAndKill();
+}
 
-  gridCBT.toPNG('coloredBT');
-  print('saved colored binary tree maze with ${gridCBT.deadEnds().length}');
+void binaryTree() {
+  var grid = ColoredGrid(25, 25);
+  BinaryTree().on(grid);
+  var start = grid.grid[12][12];
+  grid.distances = start.distances();
 
-  var gridCSW = ColoredGrid(25, 25);
-  Sidewinder().on(gridCSW);
-  var startCSW = gridCSW.grid[12][12];
-  gridCSW.distances = startCSW.distances();
+  grid.toPNG('coloredBT');
+  print('saved colored binary tree maze with ${grid.deadEnds().length}');
+}
 
-  gridCSW.toPNG('coloredSW');
+void sideWinder() {
+  var grid = ColoredGrid(25, 25);
+  Sidewinder().on(grid);
+  var start = grid.grid[12][12];
+  grid.distances = start.distances();
 
-  print('saved colored Sidewinder maze with ${gridCSW.deadEnds().length}');
+  grid.toPNG('coloredSW');
 
-  var gridCAB = ColoredGrid(25, 25);
-  AldoursBroder().on(gridCAB);
-  var startCAB = gridCAB.grid[12][12];
-  gridCAB.distances = startCAB.distances();
+  print('saved colored Sidewinder maze with ${grid.deadEnds().length}');
+}
 
-  gridCAB.toPNG('coloredAB');
-  print('saved colored Aldour-Bloder maze with ${gridCAB.deadEnds().length}');
+void aldoursBroder() {
+  var grid = ColoredGrid(25, 25);
+  AldoursBroder().on(grid);
+  var start = grid.grid[12][12];
+  grid.distances = start.distances();
 
-  var gridCW = ColoredGrid(25, 25);
-  Wilson().on(gridCW);
-  var startCW = gridCW.grid[12][12];
-  gridCW.distances = startCW.distances();
+  grid.toPNG('coloredAB');
+  print('saved colored Aldour-Bloder maze with ${grid.deadEnds().length}');
+}
 
-  gridCW.toPNG('coloredW');
-  print('saved colored Wilson maze with ${gridCW.deadEnds().length}');
+void wilson() {
+  var grid = ColoredGrid(25, 25);
+  Wilson().on(grid);
+  var start = grid.grid[12][12];
+  grid.distances = start.distances();
 
-  var gridCHAK = ColoredGrid(25, 25);
-  HuntAndKill().on(gridCHAK);
-  var startCHAK = gridCHAK.grid[12][12];
-  gridCHAK.distances = startCHAK.distances();
-  gridCHAK.toPNG('coloredCHAK');
-  print('saved colored Hunt and Kill maze with ${gridCHAK.deadEnds().length}');
+  grid.toPNG('coloredW');
+  print('saved colored Wilson maze with ${grid.deadEnds().length}');
+}
+
+void huntAndKill() {
+  var grid = ColoredGrid(25, 25);
+  HuntAndKill().on(grid);
+  var start = grid.grid[12][12];
+  grid.distances = start.distances();
+  grid.toPNG('coloredCHAK');
+  print('saved colored Hunt and Kill maze with ${grid.deadEnds().length}');
 }
