@@ -57,6 +57,9 @@ class Grid {
 
   int backgroundColorFor(Cell cell) => null;
 
+  List<Cell> deadEnds() =>
+      eachCell().where((c) => c.links.length == 1).toList();
+
   @override
   String toString() {
     var output = '+' + ('---+' * cols) + '\n';
