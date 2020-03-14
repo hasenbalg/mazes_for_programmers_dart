@@ -33,7 +33,8 @@ class Cell {
   }
 
   List<Cell> neighbors() {
-    var neighbors = [];
+    List<Cell> neighbors;
+    neighbors = [];
     if (north != null) {
       neighbors.add(north);
     }

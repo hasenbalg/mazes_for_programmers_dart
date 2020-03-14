@@ -87,11 +87,9 @@ class Grid {
     var imgWidth = cellSize * cols;
     var imgHeight = cellSize * rows;
 
-    var background = Color.fromRgb(0, 0, 0);
-    var wall = Color.fromRgb(22, 100, 8);
+    var wallColor = Color.fromRgb(22, 100, 8);
 
     var img = Image(imgWidth + 1, imgHeight + 1);
-    // img.fill(background);
     for (var mode in ['backgrounds', 'walls']) {
       for (var cell in eachCell()) {
         var x1 = cell.col * cellSize;
@@ -104,17 +102,21 @@ class Grid {
           fillRect(img, x1, y1, x2, y2, color);
         } else {
           if (cell.north == null) {
-            drawLine(img, x1, y1, x2, y1, wall, antialias: false, thickness: 5);
+            drawLine(img, x1, y1, x2, y1, wallColor,
+                antialias: false, thickness: 5);
           }
           if (cell.west == null) {
-            drawLine(img, x1, y1, x1, y2, wall, antialias: false, thickness: 5);
+            drawLine(img, x1, y1, x1, y2, wallColor,
+                antialias: false, thickness: 5);
           }
 
           if (!cell.isLinked(cell.east)) {
-            drawLine(img, x2, y1, x2, y2, wall, antialias: false, thickness: 5);
+            drawLine(img, x2, y1, x2, y2, wallColor,
+                antialias: false, thickness: 5);
           }
           if (!cell.isLinked(cell.south)) {
-            drawLine(img, x1, y2, x2, y2, wall, antialias: false, thickness: 5);
+            drawLine(img, x1, y2, x2, y2, wallColor,
+                antialias: false, thickness: 5);
           }
         }
       }
