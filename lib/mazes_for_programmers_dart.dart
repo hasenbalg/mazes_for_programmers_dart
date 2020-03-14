@@ -59,11 +59,11 @@ void run() {
 
   print('colored by distance');
 
-  binaryTree();
-  sideWinder();
-  aldoursBroder();
-  wilson();
-  huntAndKill();
+  timeAfunction(binaryTree);
+  timeAfunction(sideWinder);
+  timeAfunction(aldoursBroder);
+  timeAfunction(wilson);
+  timeAfunction(huntAndKill);
 }
 
 void binaryTree() {
@@ -114,4 +114,11 @@ void huntAndKill() {
   grid.distances = start.distances();
   grid.toPNG('coloredCHAK');
   print('saved colored Hunt and Kill maze with ${grid.deadEnds().length}');
+}
+
+void timeAfunction(Function f) {
+  var startTime = DateTime.now().microsecondsSinceEpoch;
+  f();
+  print(
+      '${f.toString().split('\'')[1]} took ${DateTime.now().microsecondsSinceEpoch - startTime} ms');
 }
