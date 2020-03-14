@@ -1,6 +1,7 @@
 import 'package:mazes_for_programmers_dart/aldours_broder.dart';
 import 'package:mazes_for_programmers_dart/colored_grid.dart';
 import 'package:mazes_for_programmers_dart/distance_grid.dart';
+import 'package:mazes_for_programmers_dart/hunt_and_kill.dart';
 import 'package:mazes_for_programmers_dart/wilson.dart';
 
 import 'sidewinder.dart';
@@ -90,4 +91,11 @@ void run() {
 
   gridCW.toPNG('coloredW');
   print('saved colored Wilson maze');
+
+  var gridCHAK = ColoredGrid(25, 25);
+  HuntAndKill().on(gridCHAK);
+  var startCHAK = gridCHAK.grid[12][12];
+  gridCHAK.distances = startCHAK.distances();
+  gridCHAK.toPNG('coloredCHAK');
+  print('saved colored Hunt and Kill maze');
 }
