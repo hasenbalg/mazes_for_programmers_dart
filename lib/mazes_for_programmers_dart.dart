@@ -1,124 +1,65 @@
-import 'package:mazes_for_programmers_dart/aldours_broder.dart';
-import 'package:mazes_for_programmers_dart/colored_grid.dart';
-import 'package:mazes_for_programmers_dart/distance_grid.dart';
-import 'package:mazes_for_programmers_dart/hunt_and_kill.dart';
-import 'package:mazes_for_programmers_dart/wilson.dart';
+import 'dart:collection';
 
-import 'sidewinder.dart';
+import 'package:mazes_for_programmers_dart/algorithms/algorithm.dart';
 
-import 'binary_tree.dart';
 import 'grid.dart';
 
+import 'package:mazes_for_programmers_dart/algorithms/sidewinder.dart';
+import 'package:mazes_for_programmers_dart/algorithms/aldours_broder.dart';
+import 'package:mazes_for_programmers_dart/algorithms/hunt_and_kill.dart';
+import 'package:mazes_for_programmers_dart/algorithms/wilson.dart';
+import 'package:mazes_for_programmers_dart/algorithms/binary_tree.dart';
+
 void run() {
-  var grid = Grid(6, 5);
-  var bt = BinaryTree().on(grid);
+  var algorithms = [
+    BinaryTree(),
+    Sidewinder(),
+    AldoursBroder(),
+    Wilson(),
+    HuntAndKill(),
+  ];
+  var tries = 50;
+  var size = 20;
 
-  print(bt);
-  bt.toPNG('binaryTree');
-  var grid2 = Grid(4, 4);
+  Map<Algorithm, num> averages;
+  averages = {};
+  for (var algorythm in algorithms) {
+    print('running $algorythm');
 
-  var sidewinder = Sidewinder().on(grid2);
-  print(sidewinder);
-  sidewinder.toPNG('sidewinder.png');
+    List<int> deadEndCounts;
+    deadEndCounts = [];
+    for (var i = 0; i < tries; i++) {
+      var grid = Grid(size, size);
+      algorythm.on(grid);
+      deadEndCounts.add(grid.deadEnds().length);
+    }
+    int totalDeadEnds;
+    totalDeadEnds = deadEndCounts.fold(0, (a, b) => a + b);
+    averages[algorythm] = totalDeadEnds / deadEndCounts.length;
+  }
 
-  var grid3 = DistanceGrid(4, 4);
-  BinaryTree().on(grid3);
-  var start = grid3.grid[0][0];
-  var distances = start.distances();
-  grid3.distances = distances;
-  print(grid3);
+  var totalCells = size * size;
 
-  print('path from nw corner to sw corner');
-
-  var grid4 = DistanceGrid(4, 4);
-  Sidewinder().on(grid4);
-  var start4 = grid4.grid[0][0];
-  var distances4 = start4.distances();
-  grid4.distances = distances4.pathTo(grid4.grid[grid4.rows - 1][0]);
-  print(grid4);
-
-  print('longest path from nw corner to sw corner');
-
-  var gridPL = DistanceGrid(5, 10);
-  Sidewinder().on(gridPL);
-
-  var startLP = gridPL.grid[0][0];
-
-  var distancesLP = startLP.distances();
-  var newStart = distancesLP.max().keys.first;
-  var newDistances = newStart.distances();
-
-  var goal = newDistances.max().keys.first;
-  // var distanceLongestPath = newDist.values.first;
-
-  gridPL.distances = newDistances.pathTo(goal);
-  print(gridPL);
-
-  gridPL.distances = newDistances.pathTo(gridPL.grid[gridPL.rows - 1][0]);
-  print(gridPL);
-
-  print('colored by distance');
-
-  timeAfunction(binaryTree);
-  timeAfunction(sideWinder);
-  timeAfunction(aldoursBroder);
-  timeAfunction(wilson);
-  timeAfunction(huntAndKill);
-}
-
-void binaryTree() {
-  var grid = ColoredGrid(25, 25);
-  BinaryTree().on(grid);
-  var start = grid.grid[12][12];
-  grid.distances = start.distances();
-
-  grid.toPNG('coloredBT');
-  print('saved colored binary tree maze with ${grid.deadEnds().length}');
-}
-
-void sideWinder() {
-  var grid = ColoredGrid(25, 25);
-  Sidewinder().on(grid);
-  var start = grid.grid[12][12];
-  grid.distances = start.distances();
-
-  grid.toPNG('coloredSW');
-
-  print('saved colored Sidewinder maze with ${grid.deadEnds().length}');
-}
-
-void aldoursBroder() {
-  var grid = ColoredGrid(25, 25);
-  AldoursBroder().on(grid);
-  var start = grid.grid[12][12];
-  grid.distances = start.distances();
-
-  grid.toPNG('coloredAB');
-  print('saved colored Aldour-Bloder maze with ${grid.deadEnds().length}');
-}
-
-void wilson() {
-  var grid = ColoredGrid(25, 25);
-  Wilson().on(grid);
-  var start = grid.grid[12][12];
-  grid.distances = start.distances();
-
-  grid.toPNG('coloredW');
-  print('saved colored Wilson maze with ${grid.deadEnds().length}');
-}
-
-void huntAndKill() {
-  var grid = ColoredGrid(25, 25);
-  HuntAndKill().on(grid);
-  var start = grid.grid[12][12];
-  grid.distances = start.distances();
-  grid.toPNG('coloredCHAK');
-  print('saved colored Hunt and Kill maze with ${grid.deadEnds().length}');
-}
-
-void timeAfunction(Function f) {
-  var startTime = DateTime.now().microsecondsSinceEpoch;
-  f();
+  print('');
   print(
-      '${f.toString().split('\'')[1]} took ${DateTime.now().microsecondsSinceEpoch - startTime} ms');
+      'Average dead ends per ${size}x${size} maze (${size * size} total cells):');
+  print('');
+
+  // var sortedKeys = averages.keys.toList(growable: false)
+  //   ..sort((k1, k2) => averages[k1].compareTo(averages[k2]));
+  // var sortedAlgorithms = LinkedHashMap.fromIterable(sortedKeys,
+  //     key: (k) => k, value: (k) => averages[k]);
+
+  // for (var algorithm in sortedAlgorithms.entries) {
+  // for (var algorithm in averages.entries) {
+  //   var value = averages[algorithm];
+  //   var percentage = value * 100 / (size * size);
+  //   print(
+  //       '${algorithm.key}: ${averages[algorithm]}, ${totalCells}, ${percentage}');
+  // }
+  averages.forEach((algorithm, number) {
+    var percentage = number * 100 / (size * size);
+    print(
+        '${algorithm.toString().split('\'')[1]}: \t${number}/\t${totalCells},\t${percentage} %');
+  });
 }

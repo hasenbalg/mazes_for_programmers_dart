@@ -1,6 +1,8 @@
-import 'grid.dart';
+import 'package:mazes_for_programmers_dart/algorithms/algorithm.dart';
+import 'package:mazes_for_programmers_dart/grid.dart';
 
-class AldoursBroder {
+class AldoursBroder implements Algorithm {
+  @override
   Grid on(Grid grid) {
     var cell = grid.randomCell();
     var unvisited = grid.size() - 1;

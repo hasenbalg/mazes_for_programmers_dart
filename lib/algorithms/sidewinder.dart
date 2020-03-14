@@ -1,8 +1,10 @@
 import 'dart:math';
 
-import 'grid.dart';
+import 'package:mazes_for_programmers_dart/algorithms/algorithm.dart';
+import 'package:mazes_for_programmers_dart/grid.dart';
 
-class Sidewinder {
+class Sidewinder implements Algorithm {
+  @override
   Grid on(Grid grid) {
     for (var row in grid.eachRow()) {
       List<Cell> run;

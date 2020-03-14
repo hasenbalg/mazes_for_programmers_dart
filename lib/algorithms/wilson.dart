@@ -1,6 +1,8 @@
-import 'grid.dart';
+import 'package:mazes_for_programmers_dart/algorithms/algorithm.dart';
+import 'package:mazes_for_programmers_dart/grid.dart';
 
-class Wilson {
+class Wilson implements Algorithm {
+  @override
   Grid on(Grid grid) {
     List<Cell> unvisited;
     unvisited = [];

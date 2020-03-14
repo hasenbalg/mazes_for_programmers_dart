@@ -1,8 +1,10 @@
 import 'dart:math';
 
-import 'grid.dart';
+import 'package:mazes_for_programmers_dart/algorithms/algorithm.dart';
+import 'package:mazes_for_programmers_dart/grid.dart';
 
-class BinaryTree {
+class BinaryTree implements Algorithm {
+  @override
   Grid on(Grid grid) {
     for (var cell in grid.eachCell()) {
       var neighbors = [];
