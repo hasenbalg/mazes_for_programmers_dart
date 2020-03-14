@@ -1,6 +1,7 @@
 import 'package:mazes_for_programmers_dart/aldours_broder.dart';
 import 'package:mazes_for_programmers_dart/colored_grid.dart';
 import 'package:mazes_for_programmers_dart/distance_grid.dart';
+import 'package:mazes_for_programmers_dart/wilson.dart';
 
 import 'sidewinder.dart';
 
@@ -71,7 +72,8 @@ void run() {
   gridCSW.distances = startCSW.distances();
 
   gridCSW.toPNG('coloredSW');
-  print('saved colored sidewinder maze');
+
+  print('saved colored Sidewinder maze');
 
   var gridCAB = ColoredGrid(25, 25);
   AldoursBroder().on(gridCAB);
@@ -80,4 +82,12 @@ void run() {
 
   gridCSW.toPNG('coloredAB');
   print('saved colored Aldour-Bloder maze');
+
+  var gridCW = ColoredGrid(25, 25);
+  Wilson().on(gridCW);
+  var startCW = gridCW.grid[12][12];
+  gridCW.distances = startCW.distances();
+
+  gridCW.toPNG('coloredW');
+  print('saved colored Wilson maze');
 }
