@@ -56,11 +56,19 @@ void run() {
 
   print('colored by distance');
 
-  var gridC = ColoredGrid(25, 25);
-  BinaryTree().on(gridC);
-  var startC = gridC.grid[12][12];
-  gridC.distances = startC.distances();
+  var gridCBT = ColoredGrid(25, 25);
+  BinaryTree().on(gridCBT);
+  var startCBT = gridCBT.grid[12][12];
+  gridCBT.distances = startCBT.distances();
 
-  gridC.toPNG('colored');
-  print('saved colored maze');
+  gridCBT.toPNG('coloredBT');
+  print('saved colored binary tree maze');
+
+  var gridCSW = ColoredGrid(25, 25);
+  Sidewinder().on(gridCSW);
+  var startCSW = gridCSW.grid[12][12];
+  gridCSW.distances = startCSW.distances();
+
+  gridCSW.toPNG('coloredSW');
+  print('saved colored sidewinder maze');
 }
