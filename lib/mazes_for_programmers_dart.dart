@@ -1,3 +1,4 @@
+import 'package:mazes_for_programmers_dart/colored_grid.dart';
 import 'package:mazes_for_programmers_dart/distance_grid.dart';
 
 import 'sidewinder.dart';
@@ -52,4 +53,14 @@ void run() {
 
   gridPL.distances = newDistances.pathTo(gridPL.grid[gridPL.rows - 1][0]);
   print(gridPL);
+
+  print('colored by distance');
+
+  var gridC = ColoredGrid(25, 25);
+  BinaryTree().on(gridC);
+  var startC = gridC.grid[12][12];
+  gridC.distances = startC.distances();
+
+  gridC.toPNG('colored');
+  print('saved colored maze');
 }

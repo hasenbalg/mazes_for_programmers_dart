@@ -53,9 +53,9 @@ class Grid {
   List<Cell> eachCell() => grid.expand((c) => c).toList();
   List<List<Cell>> eachRow() => grid;
 
-  String contentsOf(Cell cell) {
-    return ' ';
-  }
+  String contentsOf(Cell cell) => ' ';
+
+  int backgroundColorFor(Cell cell) => null;
 
   @override
   String toString() {
@@ -91,25 +91,32 @@ class Grid {
     var wall = Color.fromRgb(22, 100, 8);
 
     var img = Image(imgWidth + 1, imgHeight + 1);
-    img.fill(background);
-    for (var cell in eachCell()) {
-      var x1 = cell.col * cellSize;
-      var y1 = cell.row * cellSize;
-      var x2 = (cell.col + 1) * cellSize;
-      var y2 = (cell.row + 1) * cellSize;
+    // img.fill(background);
+    for (var mode in ['backgrounds', 'walls']) {
+      for (var cell in eachCell()) {
+        var x1 = cell.col * cellSize;
+        var y1 = cell.row * cellSize;
+        var x2 = (cell.col + 1) * cellSize;
+        var y2 = (cell.row + 1) * cellSize;
+        if (mode == 'backgrounds') {
+          var color = backgroundColorFor(cell) ?? Color.fromRgb(0, 255, 0);
+          // color = Color.fromRgb(0, 255, 0);
+          fillRect(img, x1, y1, x2, y2, color);
+        } else {
+          if (cell.north == null) {
+            drawLine(img, x1, y1, x2, y1, wall, antialias: false, thickness: 5);
+          }
+          if (cell.west == null) {
+            drawLine(img, x1, y1, x1, y2, wall, antialias: false, thickness: 5);
+          }
 
-      if (cell.north == null) {
-        drawLine(img, x1, y1, x2, y1, wall, antialias: false, thickness: 5);
-      }
-      if (cell.west == null) {
-        drawLine(img, x1, y1, x1, y2, wall, antialias: false, thickness: 5);
-      }
-
-      if (!cell.isLinked(cell.east)) {
-        drawLine(img, x2, y1, x2, y2, wall, antialias: false, thickness: 5);
-      }
-      if (!cell.isLinked(cell.south)) {
-        drawLine(img, x1, y2, x2, y2, wall, antialias: false, thickness: 5);
+          if (!cell.isLinked(cell.east)) {
+            drawLine(img, x2, y1, x2, y2, wall, antialias: false, thickness: 5);
+          }
+          if (!cell.isLinked(cell.south)) {
+            drawLine(img, x1, y2, x2, y2, wall, antialias: false, thickness: 5);
+          }
+        }
       }
     }
     if (!filename.toLowerCase().endsWith('.png')) {
