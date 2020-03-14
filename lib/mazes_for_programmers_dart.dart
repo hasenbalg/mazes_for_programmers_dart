@@ -32,4 +32,24 @@ void run() {
   var distances4 = start4.distances();
   grid4.distances = distances4.pathTo(grid4.grid[grid4.rows - 1][0]);
   print(grid4);
+
+  print('longest path from nw corner to sw corner');
+
+  var gridPL = DistanceGrid(5, 10);
+  Sidewinder().on(gridPL);
+
+  var startLP = gridPL.grid[0][0];
+
+  var distancesLP = startLP.distances();
+  var newStart = distancesLP.max().keys.first;
+  var newDistances = newStart.distances();
+
+  var goal = newDistances.max().keys.first;
+  // var distanceLongestPath = newDist.values.first;
+
+  gridPL.distances = newDistances.pathTo(goal);
+  print(gridPL);
+
+  gridPL.distances = newDistances.pathTo(gridPL.grid[gridPL.rows - 1][0]);
+  print(gridPL);
 }

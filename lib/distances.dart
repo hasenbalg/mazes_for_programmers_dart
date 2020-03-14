@@ -35,4 +35,18 @@ class Distances {
     }
     return breadcumbs;
   }
+
+  Map<Cell, int> max() {
+    var maxDistance = 0;
+    var maxCell = root;
+
+    for (var cell in cells.keys) {
+      // if cell distance > maxDistance
+      if (cells[cell] > maxDistance) {
+        maxCell = cell;
+        maxDistance = cells[cell];
+      }
+    }
+    return {maxCell: maxDistance};
+  }
 }
