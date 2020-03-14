@@ -8,8 +8,49 @@ class DistanceGrid extends Grid {
   @override
   String contentsOf(Cell cell) {
     if (distances != null && distances.getCellDistance(cell) != null) {
-      return distances.getCellDistance(cell).toString();
+      return _toBase36(distances.getCellDistance(cell));
     }
     return super.contentsOf(cell);
+  }
+
+  String _toBase36(int cellDistance) {
+    var symbols = [
+      '1',
+      '2',
+      '3',
+      '4',
+      '5',
+      '6',
+      '7',
+      '8',
+      '9',
+      'a',
+      'b',
+      'c',
+      'd',
+      'e',
+      'f',
+      'g',
+      'h',
+      'i',
+      'j',
+      'k',
+      'l',
+      'm',
+      'n',
+      'o',
+      'p',
+      'q',
+      'r',
+      's',
+      't',
+      'u',
+      'v',
+      'w',
+      'x',
+      'y',
+      'z'
+    ];
+    return symbols[cellDistance];
   }
 }
