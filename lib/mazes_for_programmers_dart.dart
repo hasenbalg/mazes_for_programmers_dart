@@ -2,6 +2,7 @@ import 'dart:collection';
 
 import 'package:mazes_for_programmers_dart/algorithms/algorithm.dart';
 import 'package:mazes_for_programmers_dart/algorithms/recursive_backtracker.dart';
+import 'package:mazes_for_programmers_dart/colored_grid.dart';
 
 import 'grid.dart';
 
@@ -11,18 +12,18 @@ import 'package:mazes_for_programmers_dart/algorithms/hunt_and_kill.dart';
 import 'package:mazes_for_programmers_dart/algorithms/wilson.dart';
 import 'package:mazes_for_programmers_dart/algorithms/binary_tree.dart';
 
-void run() {
-  var algorithms = [
-    BinaryTree(),
-    Sidewinder(),
-    AldoursBroder(),
-    Wilson(),
-    HuntAndKill(),
-    RecursiceBacktracker(),
-  ];
-  var tries = 50;
-  var size = 20;
+var algorithms = [
+  BinaryTree(),
+  Sidewinder(),
+  AldoursBroder(),
+  Wilson(),
+  HuntAndKill(),
+  RecursiceBacktracker(),
+];
+var tries = 50;
+var size = 20;
 
+void run() {
   Map<Algorithm, List<num>> averages;
   averages = {};
   for (var algorythm in algorithms) {
@@ -64,4 +65,18 @@ void run() {
     print(
         '${algorithm.toString().split('\'')[1]}: \t ${deadEnds} / \t ${totalCells}, \t ${percentage} % \t ${time} microsec');
   });
+
+  paintAllMazes();
+}
+
+void paintAllMazes() {
+  for (var algorithm in algorithms) {
+    var halfSize = (size / 2).floor();
+    var grid = ColoredGrid(size, size);
+    algorithm.on(grid);
+    var start = grid.grid[halfSize][halfSize];
+    grid.distances = start.distances();
+    grid.toPNG('${algorithm.runtimeType}');
+    print('saved colored ${algorithm.runtimeType} maze');
+  }
 }
