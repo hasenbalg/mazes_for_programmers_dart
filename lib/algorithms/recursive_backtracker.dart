@@ -18,7 +18,7 @@ class RecursiceBacktracker extends Algorithm {
       } else {
         var neighbor = (neighbors..shuffle()).first;
         current.link(neighbor);
-        stack.add(neighbor);
+        stack.add(neighbor); // new current cell
       }
     }
     return grid;

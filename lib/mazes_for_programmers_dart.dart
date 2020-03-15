@@ -1,6 +1,5 @@
-import 'dart:collection';
-
 import 'package:mazes_for_programmers_dart/algorithms/algorithm.dart';
+import 'package:mazes_for_programmers_dart/algorithms/kruskal.dart';
 import 'package:mazes_for_programmers_dart/algorithms/recursive_backtracker.dart';
 import 'package:mazes_for_programmers_dart/colored_grid.dart';
 
@@ -19,9 +18,10 @@ var algorithms = [
   Wilson(),
   HuntAndKill(),
   RecursiceBacktracker(),
+  Kruskal(),
 ];
 var tries = 50;
-var size = 20;
+var size = 25;
 
 void run() {
   Map<Algorithm, List<num>> averages;

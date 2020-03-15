@@ -1,1 +1,7 @@
 - benchmark algorithms for longest path and longest avrg. path
+- track memory consumtion
+- horizontal vs vertical passages
+- 4-way intersections vs deadends
+
+- benchmark maze solvers
+- impement Recursive Backtracker as a solver
