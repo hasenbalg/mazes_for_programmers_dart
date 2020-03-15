@@ -1,6 +1,7 @@
 import 'dart:collection';
 
 import 'package:mazes_for_programmers_dart/algorithms/algorithm.dart';
+import 'package:mazes_for_programmers_dart/algorithms/recursive_backtracker.dart';
 
 import 'grid.dart';
 
@@ -17,6 +18,7 @@ void run() {
     AldoursBroder(),
     Wilson(),
     HuntAndKill(),
+    RecursiceBacktracker(),
   ];
   var tries = 50;
   var size = 20;
