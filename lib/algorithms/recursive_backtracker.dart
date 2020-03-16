@@ -3,10 +3,11 @@ import 'package:mazes_for_programmers_dart/grid.dart';
 
 class RecursiceBacktracker extends Algorithm {
   @override
-  Grid on(Grid grid) {
+  Grid on(Grid grid, {Cell startAt}) {
+    startAt ??= grid.randomCell();
     List<Cell> stack;
     stack = [];
-    stack.add(grid.randomCell());
+    stack.add(startAt);
 
     while (stack.isNotEmpty) {
       var current = stack.last;
