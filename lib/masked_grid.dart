@@ -10,13 +10,13 @@ class MaskedGrid extends Grid {
   List<List<Cell>> prepateGrid() {
     List<List<Cell>> grid;
     grid = [];
-    for (var x = 0; x < rows; x++) {
+    for (var y = 0; y < rows; y++) {
       grid.add([]);
-      for (var y = 0; y < cols; y++) {
-        if (mask.getBitValue(x, y)) {
-          grid[x].add(Cell(x, y));
+      for (var x = 0; x < cols; x++) {
+        if (mask.getBitValue(y, x)) {
+          grid[y].add(Cell(y, x));
         } else {
-          grid[x].add(null);
+          grid[y].add(null);
         }
       }
     }

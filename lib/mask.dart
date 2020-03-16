@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 
 class Mask {
@@ -8,11 +9,31 @@ class Mask {
   int rows;
 
   Mask(this.rows, this.cols) {
+    _prepareBits();
+  }
+
+  void _prepareBits() {
     _bits = [];
     for (var x = 0; x < rows; x++) {
       _bits.add([]);
       for (var y = 0; y < cols; y++) {
         _bits[x].add(true);
+      }
+    }
+  }
+
+  Mask.fromTXT(String filePath) {
+    var lines = File(filePath).readAsLinesSync();
+    rows = lines.length;
+    cols = lines.first.length;
+    _prepareBits();
+    for (var x = 0; x < lines.length; x++) {
+      for (var y = 0; y < lines[x].length; y++) {
+        if (lines[x][y] == 'X') {
+          setBitValue(x, y, false);
+        } else {
+          setBitValue(x, y, true);
+        }
       }
     }
   }
