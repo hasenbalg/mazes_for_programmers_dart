@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:mazes_for_programmers_dart/algorithms/algorithm.dart';
 import 'package:mazes_for_programmers_dart/grid.dart';
 
@@ -15,9 +13,7 @@ class BinaryTree implements Algorithm {
         neighbors.add(cell.east);
       }
       if (neighbors.isNotEmpty) {
-        var rnd = Random();
-        var index = rnd.nextInt(neighbors.length);
-        Cell neighbor = neighbors[index];
+        Cell neighbor = (neighbors..shuffle()).first;
         cell.link(neighbor);
       }
     }

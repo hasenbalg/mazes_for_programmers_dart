@@ -20,7 +20,7 @@ class Sidewinder implements Algorithm {
             atEasternBoundry || (!atNorthernBoundry && rnd.nextInt(2) == 0);
 
         if (shouldCloseOut) {
-          var member = run[rnd.nextInt(run.length)];
+          var member = (run..shuffle()).first;
           if (member.north != null) {
             member.link(member.north);
           }
