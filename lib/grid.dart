@@ -26,23 +26,19 @@ class Grid {
     return grid;
   }
 
-  Cell randomCell() {
-    var rnd = Random();
-
-    var row = rnd.nextInt(grid.length);
-    var col = rnd.nextInt(grid[row].length);
-    return grid[row][col];
-  }
+  Cell randomCell() => (grid.expand((c) => c).toList()..shuffle()).first;
 
   void configurCells() {
     for (var cell in eachCell()) {
-      var row = cell.row;
-      var col = cell.col;
+      if (cell != null) {
+        var row = cell.row;
+        var col = cell.col;
 
-      cell.north = (row - 1 >= 0) ? grid[row - 1][col] : null;
-      cell.south = (row + 1 < grid.length) ? grid[row + 1][col] : null;
-      cell.west = (col - 1 >= 0) ? grid[row][col - 1] : null;
-      cell.east = (col + 1 < grid[row].length) ? grid[row][col + 1] : null;
+        cell.north = (row - 1 >= 0) ? grid[row - 1][col] : null;
+        cell.south = (row + 1 < grid.length) ? grid[row + 1][col] : null;
+        cell.west = (col - 1 >= 0) ? grid[row][col - 1] : null;
+        cell.east = (col + 1 < grid[row].length) ? grid[row][col + 1] : null;
+      }
     }
   }
 

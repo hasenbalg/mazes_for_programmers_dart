@@ -1,15 +1,14 @@
 import 'package:mazes_for_programmers_dart/algorithms/recursive_backtracker.dart';
-import 'package:mazes_for_programmers_dart/grid.dart';
+import 'package:mazes_for_programmers_dart/mask.dart';
+import 'package:mazes_for_programmers_dart/masked_grid.dart';
 
 void run() {
-  var grid = Grid(5, 5);
-  // orphan the cell in the western corner
-  grid.grid[0][0].east.west = null;
-  grid.grid[0][0].south.north = null;
+  var mask = Mask(5, 5);
+  mask.setBitValue(0, 0, false);
+  mask.setBitValue(2, 2, false);
+  mask.setBitValue(4, 4, false);
 
-  // ... and the cell in the south west corner
-  grid.grid[4][4].west.east = null;
-  grid.grid[4][4].north.south = null;
+  var grid = MaskedGrid(mask);
 
   RecursiceBacktracker().on(grid, startAt: grid.grid[1][1]);
   print(grid);
