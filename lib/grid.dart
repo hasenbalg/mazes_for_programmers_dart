@@ -85,7 +85,7 @@ class Grid {
     var imgWidth = cellSize * cols;
     var imgHeight = cellSize * rows;
 
-    var wallColor = Color.fromRgb(22, 100, 8);
+    var wallColor = Color.fromRgb(0, 0, 0);
 
     var img = Image(imgWidth + 1, imgHeight + 1);
     for (var mode in ['backgrounds', 'walls']) {
@@ -96,7 +96,7 @@ class Grid {
           var x2 = (cell.col + 1) * cellSize;
           var y2 = (cell.row + 1) * cellSize;
           if (mode == 'backgrounds') {
-            var color = backgroundColorFor(cell) ?? Color.fromRgb(0, 255, 0);
+            var color = backgroundColorFor(cell) ?? Color.fromRgba(0, 0, 0, 0);
             // color = Color.fromRgb(0, 255, 0);
             fillRect(img, x1, y1, x2, y2, color);
           } else {
